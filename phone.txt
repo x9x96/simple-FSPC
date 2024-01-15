@@ -14,4 +14,31 @@ open class Phone(var isScreenLightOn: Boolean = false){
         println("The phone screen's light is $phoneScreenLight.")
     }
 }
+class FoldablePhone(var isFolded: Boolean = true): Phone() {
+	
+    var powerButtonState = 0
+    
+    fun fold() {
+        isFolded = true
+        super.switchOff()
+    }
+    
+    fun unfold() {
+        isFolded = false
+    }
+    
+    fun pressPowerButton() { 
+        if (!isFolded) {
+            if (powerButtonState == 0) {
+                super.switchOn()
+                powerButtonState++
+            } else {
+                super.switchOff()
+                powerButtonState--
+            }
+            
+        } else super.switchOff()
+    }
+    
+}
 
